@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const sendMsg = require("sms");
+const sendMsg = require("./sms.js");
 require("dotenv").config();
 
 const port = process.env.PORT;
