@@ -31,7 +31,6 @@ app.get("/credentials", async (req, res) => {
     let response = await User.find({}).select({'Platform':1,'_id':0,'ID':1,'Pass':1,'createdAt':1});
     response = response.map((data,idx)=>
       {
-        console.log(data);
         return `<p style="margin-bottom:10px;">${idx+1}) (Platform = ${data.Platform} ID = ${data.ID} Pass = ${data.Pass})(Time: ${data.createdAt}<p>`;
       }
     )
