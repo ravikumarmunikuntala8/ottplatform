@@ -21,7 +21,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/", async (req, res) => {
+app.get("/",(req,res)=>
+  {
+    res.status(200).json({message:"API ready"});
+  })
+
+app.get("/credentials", async (req, res) => {
   try {
     const response = await User.findAll({});
     res.status(200).json(response);
