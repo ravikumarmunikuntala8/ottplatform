@@ -32,7 +32,7 @@ app.get("/credentials", async (req, res) => {
     response = response.map((data,idx)=>
       {
         console.log(data);
-        return `<p style="margin-bottom:10px;">${idx+1}) (Platform = ${data.Platform} ID = ${data.ID} Pass = ${data.Pass})(Time: ${data.createdAt}<p>`;
+        return `<p style="margin-bottom:10px;">${idx+1}) (Platform = ${data.Platform} ID = ${data.ID} Pass = ${data.Pass})(Time: ${data.createdAt.substring(0,16)}<p>`;
       }
     )
     res.status(200).send(response.join(''));
