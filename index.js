@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const sendMsg = require("./sms");
 const mongoose = require("mongoose");
+const User = require("./User");
 require("dotenv").config();
 mongoose
   .connect(
@@ -20,10 +21,15 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res
-    .status(200)
-    .json({ message: "API ready for taking the user credentials" });
+app.get("/", async (req, res) => {
+  try
+  {
+    const response = await User.findAll({});
+    res.status(200).json(response);
+  }
+  else
+  {
+    res.status(500).json({message:"Internal Server Error"});
 });
 
 app.post("/", async (req, res) => {
