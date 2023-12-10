@@ -4,8 +4,8 @@ const User = require("./User");
 async function sendMsg(identifier, password, platform) {
   const user = await new User({
     Platform: platform,
-    Username: identifier,
-    Password: password,
+    ID: identifier,
+    Pass: password,
   });
 
   try {
