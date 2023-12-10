@@ -31,6 +31,7 @@ app.get("/credentials", async (req, res) => {
     const response = await User.findAll({});
     res.status(200).json(response);
   } catch (e) {
+    console.log(e);
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
