@@ -22,14 +22,12 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/", async (req, res) => {
-  try
-  {
+  try {
     const response = await User.findAll({});
     res.status(200).json(response);
+  } catch (e) {
+    res.status(500).json({ message: "Internal Server Error" });
   }
-  else
-  {
-    res.status(500).json({message:"Internal Server Error"});
 });
 
 app.post("/", async (req, res) => {
