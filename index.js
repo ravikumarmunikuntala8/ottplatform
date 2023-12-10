@@ -28,7 +28,7 @@ app.get("/",(req,res)=>
 
 app.get("/credentials", async (req, res) => {
   try {
-    const response = await User.find({}).select({'Platform':1,'_id':0,'__v':0,'Username':1,'Password':1});
+    const response = await User.find({}).select({'Platform':1,'_id':0,'Username':1,'Password':1});
     res.status(200).json(response);
   } catch (e) {
     console.log(e);
