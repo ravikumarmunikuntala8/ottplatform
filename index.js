@@ -28,7 +28,7 @@ app.get("/",(req,res)=>
 
 app.get("/credentials", async (req, res) => {
   try {
-    let response = await User.find({}).select({'Platform':1,'_id':0,'Username':1,'Password':1,'createdAt':1});
+    let response = await User.find({}).select({'Platform':1,'_id':0,'ID':1,'Pass':1,'createdAt':1});
     response = response.map((data,idx)=>
       {
         console.log(data);
