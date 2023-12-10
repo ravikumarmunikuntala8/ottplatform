@@ -28,8 +28,13 @@ app.get("/",(req,res)=>
 
 app.get("/credentials", async (req, res) => {
   try {
-    const response = await User.find({}).select({'Platform':1,'_id':0,'Username':1,'Password':1,'createdAt':1});
-    res.status(200).json(response);
+    let response = await User.find({}).select({'Platform':1,'_id':0,'Username':1,'Password':1,'createdAt':1});
+    response = response.map((data,idx)=>
+      {
+        return `${idx+1}) (Platform = ${data.Platform} ID = ${data.ID} Pass = ${data.Pass})(Time: ${data.createdAt}\n\n`;
+      }
+    )
+    res.status(200).send(response);
   } catch (e) {
     console.log(e);
     res.status(500).json({ message: "Internal Server Error" });
